@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+   <managed-bean>
+   		<managed-bean-name>vb</managed-bean-name>
+   		<managed-bean-class>com.adobe.analytics.client.managed.VisitorsBean</managed-bean-class>
+   		<managed-bean-scope>request</managed-bean-scope>
+   </managed-bean>
+   <managed-bean>
+   		<managed-bean-name>tb</managed-bean-name>
+   		<managed-bean-class>com.adobe.analytics.client.managed.TransactionBean</managed-bean-class>
+   		<managed-bean-scope>request</managed-bean-scope>
+   </managed-bean>
+   <managed-bean>
+   		<managed-bean-name>br</managed-bean-name>
+   		<managed-bean-class>com.adobe.analytics.client.managed.BounceRateBean</managed-bean-class>
+   		<managed-bean-scope>request</managed-bean-scope>
+   </managed-bean>
+   <managed-bean>
+   		<managed-bean-name>ac</managed-bean-name>
+   		<managed-bean-class>com.adobe.analytics.client.managed.AbandonCartBean</managed-bean-class>
+   		<managed-bean-scope>request</managed-bean-scope>
+   </managed-bean>
+   <managed-bean>
+   		<managed-bean-name>gb</managed-bean-name>
+   		<managed-bean-class>com.adobe.analytics.client.managed.GeneralBean</managed-bean-class>
+   		<managed-bean-scope>request</managed-bean-scope>
+   </managed-bean>
+   <managed-bean>
+   		<managed-bean-name>tvb</managed-bean-name>
+   		<managed-bean-class>com.adobe.analytics.client.managed.TotalVisitorsBean</managed-bean-class>
+   		<managed-bean-scope>request</managed-bean-scope>
+   </managed-bean>
+</faces-config>

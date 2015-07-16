@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="DashBoard Real Time ACOM"/>
+    <meta name="author" content="Gustavo Melo"/>
+    
+	<title>Dashboard RealTime ACOM</title>
+	<!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    
+    <!-- Dashboard CSS -->
+    <link href="css/dashboard.css" rel="stylesheet"/>
+    
+    <!--  Fontes Utilizadas Roboto  -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <!-- GRÁFICOS -->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+    google.load('visualization', '1', {packages: ['corechart', 'bar']});
+	google.setOnLoadCallback(drawAxisTickColors);
+	function drawAxisTickColors() {
+	      var data = new google.visualization.DataTable();
+	      data.addColumn('timeofday', 'Time of Day');
+	      data.addColumn('number', #{gb.dateAtual});
+	      data.addColumn('number', #{gb.lastYear});
+	      data.addRows([
+                #{vb.chartVisitorsACOM}
+	       ]);
+
+	      var options = {
+	    	        focusTarget: 'category',
+	    	        colors: ['#CA0413' , '#CCC'],
+	    	        legend: { position: 'top', maxLines: 3 , align : 'center' },
+	    	        hAxis: {
+	    	          format: 'h:mm a',
+	    	          viewWindow: {
+	    	            min: [0, -30, 0],
+	    	            max: [24, 0, 0]
+	    	          },
+	    	          textStyle: {
+	    	            fontSize: 14,
+	    	            color: '#053061',
+	    	            bold: true,
+	    	            italic: false
+	    	          },
+	    	          titleTextStyle: {
+	    	            fontSize: 18,
+	    	            color: '#053061',
+	    	            bold: true,
+	    	            italic: false
+	    	          }
+	    	        },
+	    	        vAxis: {
+	    	          title: '(Escala em 1000)',
+	    	          textStyle: {
+	    	            fontSize: 12,
+	    	            color: '#67001f',
+	    	            bold: false,
+	    	            italic: false
+	    	          },
+	    	          titleTextStyle: {
+	    	            fontSize: 12,
+	    	            color: '#67001f',
+	    	            bold: true,
+	    	            italic: false
+	    	          }
+	    	        }
+	    	      };
+	      var chart = new google.visualization.ColumnChart(document.getElementById('chart_visits'));
+	      chart.draw(data, options);
+	    }
+    </script>
+    <script type="text/javascript">
+	    google.setOnLoadCallback(drawChart);
+	    function drawChart() {
+	      var data = google.visualization.arrayToDataTable([
+				#{tb.chartTransactionACOM}
+				]);
+	
+	      var options = {
+	    	colors: ['#CA0413' , '#888'],
+	    	legend: { position: 'top', maxLines: 3 , align : 'center' },
+	        hAxis: {titleTextStyle: {color: '#333'}},
+	        vAxis: {minValue: 0}
+	      };
+	
+	      var chart = new google.visualization.AreaChart(document.getElementById('chart_transaction'));
+	      chart.draw(data, options);
+	    }
+    </script>
+    <script type="text/javascript">
+	    google.setOnLoadCallback(drawChart);
+	    function drawChart() {
+	      var data = google.visualization.arrayToDataTable([
+					#{br.chartBouncerateACOM}
+				]);
+	
+	      var options = {
+	    	colors: ['#CA0413' , '#888'],
+	  	    legend: { position: 'top', maxLines: 3 , align : 'center' },
+	        hAxis: {titleTextStyle: {color: '#333'}},
+	        vAxis: {minValue: 0}
+	      };
+	
+	      var chart = new google.visualization.AreaChart(document.getElementById('chart_bouncerate'));
+	      chart.draw(data, options);
+	    }
+    </script>
+    <script type="text/javascript">
+	    google.setOnLoadCallback(drawChart);
+	    function drawChart() {
+	      var data = google.visualization.arrayToDataTable([
+					#{ac.chartabandoncartACOM}
+				]);
+	
+	      var options = {
+	        colors: ['#CA0413','#888'],
+	        legend: { position: 'top', maxLines: 3 , align : 'center' },
+	        hAxis: {titleTextStyle: {color: '#333'}},
+	        vAxis: {minValue: 0}
+	      };
+	
+	      var chart = new google.visualization.AreaChart(document.getElementById('chart_abandon'));
+	      chart.draw(data, options);
+	    }
+    </script>
+    <script  type="text/javascript">
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+
+      var data = google.visualization.arrayToDataTable([
+			#{tvb.chartshareVisitors}
+      ]);
+
+      var options = {
+        pieHole: 0.6,
+        legend: 'none',
+        pieStartAngle: 135,
+        pieSliceText: 'none',
+        enableInteractivity: 'false',
+        tooltip: { trigger: 'none' },
+        chartArea: {left:0,top:2,width:'95%',height:'95%'},
+        slices: {
+          0: { color: '#CA0413' },
+          1: { color: 'transparent' }
+        }
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('chart_share'));
+
+      chart.draw(data, options);
+    }
+    </script>
+</h:head>
+<h:body>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<div id="wrapper">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		            <div class="navbar-header">
+		            	<img src="img/Logo.png" class="logo"/>
+		                <p class="navbar-brand logo-name"> Monitoramento WA </p>
+		            </div>
+		         <div class="col-lg-6" id="refresh">
+	             	<h4> Atualizado em   <h:outputText value="${gb.refreshDate}"/> as <h:outputText value="${gb.refreshHour}"/> </h4>            	    		
+            	</div>
+        </nav>    
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="panel-heading col-sm-2 panel-header">
+                            <div class="panel-title">
+                                <div class="col-sm-2">
+                                    <h3 class="panel-title">
+                                        <i class="material-icons md-27">insert_chart</i>
+                                    </h3>
+                                </div>
+                                <div class="col-sm-2">
+                                     <h3 class="panel-letter">
+                                        VISITAS
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="panel-body panel-shadow">
+                                
+                               <div id="chart_visits" style="width: 1300px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                                <div class="panel-body panel-shadow panel-general">
+                                	<div class="col-sm-2">
+                                        <h2> <h:outputText value="${vb.totalVisitors}"/>  </h2>
+                                        <p class="general"> MIL VISITAS</p>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <h2> <h:outputText value="${tb.totalTransaction}"/> % </h2>
+                                        <p class="general">MÉDIA DE CONVERSÃO</p>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        	<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['corechart']}]}"></script>
+       										<div id="chart_share" style="width: 300px; height: 100px;"/>
+       										<p id="pctshare"> <h:outputText value="${tvb.shareVisitorsACOM}"/> % </p>
+       										<p class="general sharevisits">SHARE DE VISITAS</p>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <h2> <h:outputText value="${br.totalBounce}"/> %</h2>
+                                        <p class="general">MÉDIA DE BOUNCE RATE</p>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <h2> <h:outputText value="${ac.totalAbandonCart}"/> % </h2>
+                                        <p class="general">MÉDIA DE ABANDONO</p>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-4">
+                                <div class="panel-body panel-shadow little-panel">
+                                    <div class="row">
+                                        <h4 class="panel-letter-red">
+                                            <i class="material-icons md-27">attach_money</i>
+
+                                         CONVERSÃO</h4>
+                                    </div>
+                                        <hr/>
+                                        <div id="chart_transaction"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="panel-body panel-shadow little-panel">
+                                    <div class="row">
+                                        <h4 class="panel-letter-red">
+                                            <i class="material-icons md-27">trending_down</i>
+
+                                         BOUNCE RATE</h4>
+                                    </div>
+                                        <hr/>
+                                        <div id="chart_bouncerate"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="panel-body panel-shadow little-panel">
+                                    <div class="row">
+                                        <h4 class="panel-letter-red">
+                                            <i class="material-icons md-27">shopping_cart</i>
+
+                                         ABANDONO CARRINHO</h4>
+                                    </div>
+                                        <hr/>
+                                        <div id="chart_abandon"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+        </div>
+	</div>
+</h:body>
+</html>

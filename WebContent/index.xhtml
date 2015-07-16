@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	<h:head>
+	    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	    <script type="text/javascript">
+			google.load('visualization', '1', {packages: ['corechart', 'bar']});
+			google.setOnLoadCallback(drawStacked);
+			function drawStacked() {
+			      var data = new google.visualization.DataTable();
+			      data.addColumn('timeofday', 'Time of Day' , 'red');
+			      data.addColumn('number', 'Visits');
+
+			      data.addRows([
+                        #{vb.chartVisitorsACOM}
+			       ]);
+
+			      var options = {
+			        title: 'Visitas ACOM',
+			        colors: ['red'],
+			        isStacked: true,
+			        hAxis: {
+			          title: 'Tempo',
+			          format: 'h:mm a',
+			          viewWindow: {
+			            min: [0, -30, 0],
+			            max: [24, 0, 0]
+			          }
+			        },
+			        vAxis: {
+			          title: 'Escala 1: 1000'
+			        }
+			      };
+
+			      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+			      chart.draw(data, options);
+			    }
+		</script> 
+	</h:head>
+	<h:body>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		
+     <div id="chart_div" style="color:red"></div>
+	</h:body>
+</html>
