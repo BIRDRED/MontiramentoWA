@@ -34,4 +34,9 @@
    		<managed-bean-class>com.adobe.analytics.client.managed.TotalVisitorsBean</managed-bean-class>
    		<managed-bean-scope>request</managed-bean-scope>
    </managed-bean>
+   <managed-bean>
+   		<managed-bean-name>dbb</managed-bean-name>
+   		<managed-bean-class>com.adobe.analytics.client.managed.DashboardBean</managed-bean-class>
+   		<managed-bean-scope>request</managed-bean-scope>
+   </managed-bean>
 </faces-config>
