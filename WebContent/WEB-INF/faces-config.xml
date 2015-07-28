@@ -35,8 +35,13 @@
    		<managed-bean-scope>request</managed-bean-scope>
    </managed-bean>
    <managed-bean>
-   		<managed-bean-name>dbb</managed-bean-name>
-   		<managed-bean-class>com.adobe.analytics.client.managed.DashboardBean</managed-bean-class>
+   		<managed-bean-name>dbbacom</managed-bean-name>
+   		<managed-bean-class>com.adobe.analytics.client.managed.DashboardACOMBean</managed-bean-class>
+   		<managed-bean-scope>request</managed-bean-scope>
+   </managed-bean>
+   <managed-bean>
+   		<managed-bean-name>dbbsuba</managed-bean-name>
+   		<managed-bean-class>com.adobe.analytics.client.managed.DashboardSUBABean</managed-bean-class>
    		<managed-bean-scope>request</managed-bean-scope>
    </managed-bean>
 </faces-config>

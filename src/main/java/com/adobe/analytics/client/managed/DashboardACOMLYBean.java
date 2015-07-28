@@ -21,7 +21,7 @@ import com.adobe.analytics.client.report.DashboardReport;
 
 @ManagedBean
 @SessionScoped
-public class DashboardLYBean implements Serializable {
+public class DashboardACOMLYBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	//Variaveis de Listas 
@@ -33,7 +33,7 @@ public class DashboardLYBean implements Serializable {
 	
 	//Definição de Data
 	 
-	public DashboardLYBean() {
+	public DashboardACOMLYBean() {
 		 DashboardReport dbr = new DashboardReport();
 		 				//Inicialização de Variaveis
 			 				abandoncart = new ArrayList<AbandonCart>();
@@ -67,7 +67,7 @@ public class DashboardLYBean implements Serializable {
 					 AbandonCart abandon =  new AbandonCart(hour, abandonCart, rd.getCounts().get(2), rd.getCounts().get(1));
 					 BounceRate bounce = new BounceRate(hour, bounceratepct.setScale(2, BigDecimal.ROUND_UP));
 					 Visitors vis = new Visitors(hour, visitorsACOM);
-					 Transaction trans = new Transaction(hour,visitorsACOM.doubleValue(), rd.getCounts().get(1), transactionpct);
+					 Transaction trans = new Transaction(hour,visitorsACOM.doubleValue(), rd.getCounts().get(1), transactionpct.setScale(2, BigDecimal.ROUND_UP));
 					 
 		 				
 		 			//Adiciona na Lista

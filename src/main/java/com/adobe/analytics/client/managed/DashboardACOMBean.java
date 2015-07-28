@@ -21,7 +21,7 @@ import com.adobe.analytics.client.report.DashboardReport;
 
 @ManagedBean
 @SessionScoped
-public class DashboardBean implements Serializable {
+public class DashboardACOMBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	//Variaveis de Listas 
@@ -57,7 +57,7 @@ public class DashboardBean implements Serializable {
 	String date = sdf.format(new Date()).toString();
 	
 	
-	public DashboardBean() {
+	public DashboardACOMBean() {
 		 DashboardReport dbr = new DashboardReport();
 		 				//Inicialização de Variaveis
 			 				abandoncart = new ArrayList<AbandonCart>();
@@ -151,15 +151,18 @@ public class DashboardBean implements Serializable {
 	}
 
 	public BigDecimal getTotalAbandonCart() {
-		return totalAbandonCart;
+		BigDecimal totalAbandonCart = new BigDecimal((totalSumAbandonCart.doubleValue()/totalHours.doubleValue()));
+		return totalAbandonCart.setScale(2, BigDecimal.ROUND_UP);
 	}
 
 	public void setTotalAbandonCart(BigDecimal totalAbandonCart) {
 		this.totalAbandonCart = totalAbandonCart;
 	}
 
+
 	public BigDecimal getTotalTransaction() {
-		return totalTransaction;
+		BigDecimal totalTransaction = new BigDecimal((totalSumTransaction.doubleValue()/totalHours.doubleValue()));
+		return totalTransaction.setScale(2, BigDecimal.ROUND_UP);
 	}
 
 	public void setTotalTransaction(BigDecimal totalTransaction) {
@@ -167,15 +170,20 @@ public class DashboardBean implements Serializable {
 	}
 
 	public BigDecimal getTotalBounce() {
-		return totalBounce;
+		BigDecimal totalBounceRate = new BigDecimal((totalSumBounce.doubleValue()/totalHours.doubleValue()));
+		return totalBounceRate.setScale(2, BigDecimal.ROUND_UP);
 	}
 
 	public void setTotalBounce(BigDecimal totalBounce) {
 		this.totalBounce = totalBounce;
 	}
 
-	public BigDecimal getTotalVisitorsACOM() {
-		return totalVisitorsACOM;
+	public Integer getTotalVisitorsACOM() {
+		BigDecimal tv = BigDecimal.ZERO;
+		if(totalVisitorsACOM.toString().length() > 3){
+			tv = new BigDecimal((totalVisitorsACOM.doubleValue()/1000));
+		}
+		return tv.intValue();
 	}
 
 	public void setTotalVisitorsACOM(BigDecimal totalVisitorsACOM) {
@@ -227,8 +235,8 @@ public class DashboardBean implements Serializable {
 	}
 
 	private void populateData() {
-		DashboardBean dbb = new DashboardBean();
-		DashboardLYBean dbly = new DashboardLYBean();
+		DashboardACOMBean dbb = new DashboardACOMBean();
+		DashboardACOMLYBean dbly = new DashboardACOMLYBean();
 		StringBuilder sbVisitors = new StringBuilder();
 		StringBuilder sbBounce = new StringBuilder();
 		StringBuilder sbAbandon = new StringBuilder();
@@ -245,7 +253,7 @@ public class DashboardBean implements Serializable {
 					}else{
 						sbVisitors.append(dbb.getVisitors().get(i).getVisitors().doubleValue()/1000);
 						sbVisitors.append(",");
-						sbVisitors.append(dbb.getVisitors().get(i).getVisitors().doubleValue()/1000);
+						sbVisitors.append(dbly.getVisitors().get(i).getVisitors().doubleValue()/1000);
 						sbVisitors.append("]");
 						sbVisitors.append(",");
 					}
@@ -318,11 +326,9 @@ public class DashboardBean implements Serializable {
 	}
 	
 	public static void main(String[] args) {
-		DashboardBean dbb = new DashboardBean();
-		System.out.println(dbb.getChartVisitorsACOM());
-		System.out.println(dbb.getChartBouncerateACOM());
-		System.out.println(dbb.getChartTransactionACOM());
-		System.out.println(dbb.getChartabandoncartACOM());
+		DashboardACOMBean dbb = new DashboardACOMBean();
+		System.out.println(dbb.getTotalTransaction());
+		System.out.println(dbb.getTotalVisitorsACOM());
 	}
 
 }

@@ -199,9 +199,12 @@ ul.message-dropdown {
 .panel-header{
     background: #CA0413;
     -moz-border-radius:7px;
-    /* -webkit-border-radius:7px; */
-    /* border-radius: 0px; */
+    border-top-right-radius: 12px;
+}
 
+.panel-header-suba{
+    background: #018CC1;
+    -moz-border-radius:7px;
     border-top-right-radius: 12px;
 }
 
@@ -286,4 +289,8 @@ h4{
 	position:relative;
 	padding-top: 0.5%;
 	right: 15%;
+}
+
+.suba{
+	color: #018CC1;
 }
