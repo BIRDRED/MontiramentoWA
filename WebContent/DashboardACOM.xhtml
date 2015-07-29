@@ -41,7 +41,9 @@
 
 	      var options = {
 	    	        focusTarget: 'category',
-	    	        colors: ['#CCCCCC','#CA0413' , '#CCC'],
+	    	        width: 1850,
+	    	        height: 400,
+	    	        colors: ['#E07179','#CA0413' , '#CCC'],
 	    	        legend: { position: 'top', maxLines: 3 , align : 'center' },
 	    	        hAxis: {
 	    	          format: 'h:mm a',
@@ -179,23 +181,23 @@
         </nav>    
         <div id="page-wrapper">
             <div class="container-fluid">
-                <div class="col-sm-12">
+                <div class="col-lg-12">
                     <div class="row">
-                        <div class="panel-heading col-sm-2 panel-header">
+                        <div class="panel-heading col-lg-2 panel-header">
                             <div class="panel-title">
-                                <div class="col-sm-2">
+                                <div class="col-lg-2">
                                     <h3 class="panel-title">
                                         <i class="material-icons md-27">insert_chart</i>
                                     </h3>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-lg-2">
                                      <h3 class="panel-letter">
                                         VISITAS
                                     </h3>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-2 right">
+                        <div class="col-lg-2 right">
                         <h4> Latencia   <h:outputText value="${dbbacom.latenciaVisitors}"/> min </h4>  
                         </div>
                     </div>
@@ -208,9 +210,9 @@
                 </div>
             </div>
                     <div class="row">
-                        <div class="col-sm-12">
+                        <div class="col-lg-12">
                                 <div class="panel-body panel-shadow panel-general">
-                                	<div class="col-sm-2">
+                                	<div class="col-lg-2">
                                         <h2> <h:outputText value="${dbbacom.totalVisitorsACOM}"/>  </h2>
                                         <c:if test="#{dbbacom.totalVisitorsACOM > dbbacomly.totalVisitorsACOM }" >
                                         	<p class="general seta-cima"> MIL VISITAS</p>
@@ -222,7 +224,7 @@
                                         	<p class="general seta-baixo"> MIL VISITAS</p>
                                         </c:if>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-lg-2">
                                         <h2> <h:outputText value="${dbbacom.totalTransaction}"/> % </h2>
                                          <c:if test="#{dbbacom.totalTransaction > dbbacomly.totalSumTransaction }" >
                                         	<p class="general seta-cima"> MÉDIA DE CONVERSÃO</p>
@@ -234,13 +236,15 @@
                                         	<p class="general seta-baixo"> MÉDIA DE CONVERSÃO</p>
                                         </c:if>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-lg-1"/>
+                                    <div class="col-lg-2">
                                         	<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['corechart']}]}"></script>
        										<div id="chart_share" style="width: 300px; height: 100px;"/>
        										<p id="pctshare"> <h:outputText value="${tvb.shareVisitorsACOM}"/> % </p>
-       										<p class="general sharevisits">SHARE DE VISITAS</p>
+       										<p class="general sharevisits">SHARE DE VISITAS B2W</p>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-lg-1"/>
+                                    <div class="col-lg-2">
                                         <h2> <h:outputText value="${dbbacom.totalBounce}"/> %</h2>
                                          <c:if test="#{dbbacom.totalBounce > dbbacomly.totalSumBounce }" >
                                         	<p class="general seta-cima"> MÉDIA DE BOUNCE RATE</p>
@@ -252,7 +256,7 @@
                                         	<p class="general seta-baixo"> MÉDIA DE BOUNCE RATE</p>
                                         </c:if>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-lg-2">
                                         <h2> <h:outputText value="${dbbacom.totalAbandonCart}"/> % </h2>
                                          <c:if test="#{dbbacom.totalAbandonCart > dbbacomly.totalSumAbandonCart }" >
                                         	<p class="general seta-cima"> MÉDIA DE ABANDONO</p>
@@ -269,8 +273,8 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-12">
-                            <div class="col-sm-4">
+                        <div class="col-lg-12">
+                            <div class="col-lg-4">
                                 <div class="panel-body panel-shadow little-panel">
                                     <div class="row">
                                         <h4 class="panel-letter-red">
@@ -282,7 +286,7 @@
                                         <div id="chart_transaction"></div>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-lg-4">
                                 <div class="panel-body panel-shadow little-panel">
                                     <div class="row">
                                         <h4 class="panel-letter-red">
@@ -294,7 +298,7 @@
                                         <div id="chart_bouncerate"></div>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-lg-4">
                                 <div class="panel-body panel-shadow little-panel">
                                     <div class="row">
                                         <h4 class="panel-letter-red">
@@ -311,5 +315,8 @@
             
         </div>
 	</div>
+	<footer>
+		<p class="general"> Todos os direitos reservados a B2W Digital</p>
+	</footer>
 </h:body>
 </html>

@@ -15,7 +15,7 @@ import com.adobe.analytics.client.method.ReportSuiteMethods;
 public class TransactionReport {
 	
 	public ReportResponse getTransaction(String reportsuite , String datapublicacao ) throws IOException, InterruptedException {
-		AnalyticsClient client = AnalyticsClient.authenticateWithSecret(,"api3.omniture.com");
+		AnalyticsClient client = AnalyticsClient.authenticateWithSecret("api3.omniture.com");
 		ReportSuiteMethods suiteMethods = new ReportSuiteMethods(client);
 		ReportDescription desc = new ReportDescription();
 						  desc.setReportSuiteID(reportsuite);
