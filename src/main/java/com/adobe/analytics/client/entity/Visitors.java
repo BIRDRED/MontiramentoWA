@@ -3,28 +3,28 @@ package com.adobe.analytics.client.entity;
 import java.math.BigDecimal;
 
 public class Visitors {
-		private String hour;
+		private Integer hour;
 		private BigDecimal visitors;
 		
 		public Visitors() {
 			super();
 		}
 		
-		public Visitors(String hour, BigDecimal visitors) {
+		public Visitors(Integer hour, BigDecimal visitors) {
 			this.hour = hour;
 			this.visitors = visitors;
 		}
 
 
-		public String getHour() {
+		
+
+		public Integer getHour() {
 			return hour;
 		}
 
-
-		public String setHour(String hour) {
-			return this.hour = hour;
+		public void setHour(Integer hour) {
+			this.hour = hour;
 		}
-
 
 		public BigDecimal getVisitors() {
 			return visitors;

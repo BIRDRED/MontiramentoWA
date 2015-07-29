@@ -40,6 +40,11 @@
    		<managed-bean-scope>request</managed-bean-scope>
    </managed-bean>
    <managed-bean>
+   		<managed-bean-name>dbbacomly</managed-bean-name>
+   		<managed-bean-class>com.adobe.analytics.client.managed.DashboardACOMLYBean</managed-bean-class>
+   		<managed-bean-scope>request</managed-bean-scope>
+   </managed-bean>
+   <managed-bean>
    		<managed-bean-name>dbbsuba</managed-bean-name>
    		<managed-bean-class>com.adobe.analytics.client.managed.DashboardSUBABean</managed-bean-class>
    		<managed-bean-scope>request</managed-bean-scope>

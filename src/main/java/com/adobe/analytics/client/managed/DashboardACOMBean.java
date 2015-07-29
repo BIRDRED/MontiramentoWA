@@ -12,6 +12,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import com.adobe.analytics.client.domain.ReportData;
+import com.adobe.analytics.client.domain.ReportResponse;
 import com.adobe.analytics.client.entity.AbandonCart;
 import com.adobe.analytics.client.entity.BounceRate;
 import com.adobe.analytics.client.entity.Transaction;
@@ -50,6 +51,8 @@ public class DashboardACOMBean implements Serializable {
 	//Total de Horas
 	Integer totalHours;
 	
+	//Latencia
+	BigDecimal latenciaVisitors;
 	
 	//Definição de Data
 	GeneralBean gb = new GeneralBean();
@@ -57,8 +60,9 @@ public class DashboardACOMBean implements Serializable {
 	String date = sdf.format(new Date()).toString();
 	
 	
-	public DashboardACOMBean() {
+	public DashboardACOMBean() throws IOException, InterruptedException {
 		 DashboardReport dbr = new DashboardReport();
+		 ReportResponse report =  dbr.getDashboardACOM("b2w-acom", date);
 		 				//Inicialização de Variaveis
 			 				abandoncart = new ArrayList<AbandonCart>();
 			 				bouncerate = new ArrayList<BounceRate>();
@@ -75,8 +79,9 @@ public class DashboardACOMBean implements Serializable {
 			 		 //Inicialização de Hora
 		 				totalHours = 0;
 		 				
-			 try {
-				for(ReportData rd : dbr.getDashboardACOM("b2w-acom", date).getReport().getData()){
+		 			//Latencia dos Dados
+		 				latenciaVisitors = new BigDecimal(report.getReport().getMetrics().get(0).getLatency());
+				for(ReportData rd : report.getReport().getData()){
 					//Taxas de Relatório
 						BigDecimal abandonCart = BigDecimal.ZERO;
 						BigDecimal visitorsACOM = BigDecimal.ZERO;
@@ -96,7 +101,7 @@ public class DashboardACOMBean implements Serializable {
 					 //Instancia dos dados
 					 AbandonCart abandon =  new AbandonCart(hour, abandonCart.setScale(2, BigDecimal.ROUND_UP), rd.getCounts().get(2), rd.getCounts().get(1));
 					 BounceRate bounce = new BounceRate(hour, bounceratepct.setScale(2, BigDecimal.ROUND_UP));
-					 Visitors vis = new Visitors(hour, visitorsACOM);
+					 Visitors vis = new Visitors(rd.getHour(), visitorsACOM);
 					 Transaction trans = new Transaction(hour,visitorsACOM.doubleValue(), rd.getCounts().get(1), transactionpct.setScale(2, BigDecimal.ROUND_UP));
 					 
 					 //Soma dos Totais 
@@ -112,10 +117,7 @@ public class DashboardACOMBean implements Serializable {
 					 	transactions.add(trans);
 					 	
 				 }
-			} catch (IOException | InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 	}
 	
 	public List<BounceRate> getBouncerate() {
@@ -190,7 +192,7 @@ public class DashboardACOMBean implements Serializable {
 		this.totalVisitorsACOM = totalVisitorsACOM;
 	}
 
-	public String getChartabandoncartACOM() {
+	public String getChartabandoncartACOM() throws IOException, InterruptedException{
 		if (chartabandoncartACOM == null || chartabandoncartACOM.trim().length() <= 0) {
 			populateData();
 		}
@@ -201,7 +203,7 @@ public class DashboardACOMBean implements Serializable {
 		this.chartabandoncartACOM = chartabandoncartACOM;
 	}
 
-	public String getChartBouncerateACOM() {
+	public String getChartBouncerateACOM() throws IOException, InterruptedException{
 		if (chartBouncerateACOM == null || chartBouncerateACOM.trim().length() <= 0) {
 			populateData();
 		}
@@ -212,7 +214,7 @@ public class DashboardACOMBean implements Serializable {
 		this.chartBouncerateACOM = chartBouncerateACOM;
 	}
 
-	public String getChartTransactionACOM() {
+	public String getChartTransactionACOM() throws IOException, InterruptedException{
 		if (chartTransactionACOM == null || chartTransactionACOM.trim().length() <= 0) {
 			populateData();
 		}
@@ -223,7 +225,7 @@ public class DashboardACOMBean implements Serializable {
 		this.chartTransactionACOM = chartTransactionACOM;
 	}
 
-	public String getChartVisitorsACOM() {
+	public String getChartVisitorsACOM() throws IOException, InterruptedException {
 		if (chartVisitorsACOM == null || chartVisitorsACOM.trim().length() <= 0) {
 			populateData();
 		}
@@ -233,8 +235,18 @@ public class DashboardACOMBean implements Serializable {
 	public void setChartVisitorsACOM(String chartVisitorsACOM) {
 		this.chartVisitorsACOM = chartVisitorsACOM;
 	}
+	
+	
 
-	private void populateData() {
+	public BigDecimal getLatenciaVisitors() {
+		return new BigDecimal(latenciaVisitors.intValue()/60);
+	}
+
+	public void setLatenciaVisitors(BigDecimal latenciaVisitors) {
+		this.latenciaVisitors = latenciaVisitors;
+	}
+
+	private void populateData() throws IOException, InterruptedException {
 		DashboardACOMBean dbb = new DashboardACOMBean();
 		DashboardACOMLYBean dbly = new DashboardACOMLYBean();
 		StringBuilder sbVisitors = new StringBuilder();
@@ -242,22 +254,37 @@ public class DashboardACOMBean implements Serializable {
 		StringBuilder sbAbandon = new StringBuilder();
 		StringBuilder sbTrans =  new StringBuilder();
 		for (int i=0; i < dbb.getVisitors().size(); i++) {
+			if(dbb.getVisitors().get(i).getVisitors().doubleValue() != 0 && dbly.getVisitors().get(i).getVisitors().doubleValue() != 0 ){
 						sbVisitors.append("[{ v: [");
 						sbVisitors.append(dbb.getVisitors().get(i).getHour());
 						sbVisitors.append(", 0, 0], f: '");
 						sbVisitors.append(dbb.getVisitors().get(i).getHour());
 						sbVisitors.append(" am'},");
-					if(dbb.getVisitors().get(i).getVisitors().doubleValue() == 0 || dbly.getVisitors().get(i).getVisitors().doubleValue() == 0 ){
-						sbVisitors.append("0,0]");
-						sbVisitors.append(",");
-					}else{
-						sbVisitors.append(dbb.getVisitors().get(i).getVisitors().doubleValue()/1000);
-						sbVisitors.append(",");
-						sbVisitors.append(dbly.getVisitors().get(i).getVisitors().doubleValue()/1000);
-						sbVisitors.append("]");
-						sbVisitors.append(",");
-					}
+						if(dbb.getVisitors().get(i).getHour() == gb.getCompareHour()){
+							sbVisitors.append(dbb.getVisitors().get(i).getVisitors().doubleValue() * 2/1000);
+							sbVisitors.append(",");
+							sbVisitors.append(dbb.getVisitors().get(i).getVisitors().doubleValue()/1000);
+						}else if(dbb.getVisitors().get(i).getHour() == gb.getCompareHour() - 1){
+							if((dbb.getLatenciaVisitors().intValue()  + 30) - 60 >= gb.getCompareMinutes()
+								&& (latenciaVisitors.intValue() + 30) - 60 > 0 ){
+								sbVisitors.append(dbb.getVisitors().get(i).getVisitors().doubleValue() * 2/1000);
+								sbVisitors.append(",");
+								sbVisitors.append(dbb.getVisitors().get(i).getVisitors().doubleValue()/1000);
+							}else{
+								sbVisitors.append("0,");
+								sbVisitors.append(dbb.getVisitors().get(i).getVisitors().doubleValue()/1000);
+							}
+						}else{
+							sbVisitors.append("0,");
+							sbVisitors.append(dbb.getVisitors().get(i).getVisitors().doubleValue()/1000);
+						}
+	
+							sbVisitors.append(",");
+							sbVisitors.append(dbly.getVisitors().get(i).getVisitors().doubleValue()/1000);
+							sbVisitors.append("]");
+							sbVisitors.append(",");
 				}
+			}
 		chartVisitorsACOM = sbVisitors.toString();
 			sbBounce.append("['Hora' ,");
 			sbBounce.append(gb.getDateAtual());
@@ -265,13 +292,10 @@ public class DashboardACOMBean implements Serializable {
 			sbBounce.append(gb.getLastYear());
 			sbBounce.append("],");
 				for (int i=0; i < dbb.getBouncerate().size(); i++) {
-					sbBounce.append("['");
-					sbBounce.append(dbb.getBouncerate().get(i).getHour());
-					sbBounce.append("h',");
-					if(dbb.getBouncerate().get(i).getBouncerate().doubleValue() == 0 || dbly.getBouncerate().get(i).getBouncerate().doubleValue() == 0 ){
-						sbBounce.append("0,0]");
-						sbBounce.append(",");
-					}else{
+					if(dbb.getBouncerate().get(i).getBouncerate().doubleValue() != 0 && dbly.getBouncerate().get(i).getBouncerate().doubleValue() != 0 ){
+						sbBounce.append("['");
+						sbBounce.append(dbb.getBouncerate().get(i).getHour());
+						sbBounce.append("h',");
 						sbBounce.append(dbb.getBouncerate().get(i).getBouncerate());
 						sbBounce.append(",");
 						sbBounce.append(dbly.getBouncerate().get(i).getBouncerate());
@@ -286,13 +310,10 @@ public class DashboardACOMBean implements Serializable {
 						sbTrans.append(gb.getLastYear());
 						sbTrans.append("],");
 				for (int i=0; i < dbb.getTransactions().size(); i++) {
-						sbTrans.append("['");
-						sbTrans.append(dbb.getTransactions().get(i).getHour());
-						sbTrans.append("h',");
-						if(dbb.getTransactions().get(i).getTransactionpct().doubleValue() == 0 || dbly.getTransactions().get(i).getTransactionpct().doubleValue() == 0 ){
-							sbTrans.append("0,0]");
-							sbTrans.append(",");
-						}else{
+					if(dbb.getTransactions().get(i).getTransactionpct().doubleValue() != 0 && dbly.getTransactions().get(i).getTransactionpct().doubleValue() != 0 ){		
+							sbTrans.append("['");
+							sbTrans.append(dbb.getTransactions().get(i).getHour());
+							sbTrans.append("h',");
 							sbTrans.append(dbb.getTransactions().get(i).getTransactionpct());
 							sbTrans.append(",");
 							sbTrans.append(dbly.getTransactions().get(i).getTransactionpct());
@@ -308,13 +329,10 @@ public class DashboardACOMBean implements Serializable {
 					  stringBuilder.append(gb.getLastYear());
 					  stringBuilder.append("],");
 		for (int i=0; i < dbb.getAbandoncart().size(); i++) {
-				stringBuilder.append("['");
-				stringBuilder.append(dbb.getAbandoncart().get(i).getHour());
-				stringBuilder.append("h',");
-				if(dbb.getAbandoncart().get(i).getAbandoncart().doubleValue() == 0 || dbly.getAbandoncart().get(i).getAbandoncart().doubleValue() == 0 ){
-					stringBuilder.append("0,0]");
-					stringBuilder.append(",");
-				}else{
+			if(dbb.getAbandoncart().get(i).getAbandoncart().doubleValue() != 0 && dbly.getAbandoncart().get(i).getAbandoncart().doubleValue() != 0 ){
+					stringBuilder.append("['");
+					stringBuilder.append(dbb.getAbandoncart().get(i).getHour());
+					stringBuilder.append("h',");
 					stringBuilder.append(dbb.getAbandoncart().get(i).getAbandoncart());
 					stringBuilder.append(",");
 					stringBuilder.append(dbly.getAbandoncart().get(i).getAbandoncart());
@@ -323,12 +341,6 @@ public class DashboardACOMBean implements Serializable {
 				}
 			}
 		chartabandoncartACOM = stringBuilder.toString();
-	}
-	
-	public static void main(String[] args) {
-		DashboardACOMBean dbb = new DashboardACOMBean();
-		System.out.println(dbb.getTotalTransaction());
-		System.out.println(dbb.getTotalVisitorsACOM());
 	}
 
 }

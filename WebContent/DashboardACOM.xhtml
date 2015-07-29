@@ -4,9 +4,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 <h:head>
+	<meta http-equiv="refresh" content="600"/> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="description" content="DashBoard Real Time ACOM"/>
@@ -30,6 +32,7 @@
 	function drawAxisTickColors() {
 	      var data = new google.visualization.DataTable();
 	      data.addColumn('timeofday', 'Time of Day');
+	      data.addColumn('number', 'Previsão');
 	      data.addColumn('number', #{gb.dateAtual});
 	      data.addColumn('number', #{gb.lastYear});
 	      data.addRows([
@@ -38,7 +41,7 @@
 
 	      var options = {
 	    	        focusTarget: 'category',
-	    	        colors: ['#CA0413' , '#CCC'],
+	    	        colors: ['#CCCCCC','#CA0413' , '#CCC'],
 	    	        legend: { position: 'top', maxLines: 3 , align : 'center' },
 	    	        hAxis: {
 	    	          format: 'h:mm a',
@@ -161,12 +164,13 @@
     }
     </script>
 </h:head>
+
 <h:body>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<div id="wrapper">
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		            <div class="navbar-header">
-		            	<img src="img/Logo.png" class="logo"/>
+		            	<img src="img/Logo-ACOM2.png" class="logo"/>
 		                <p class="navbar-brand logo-name"> Monitoramento WA </p>
 		            </div>
 		         <div class="col-lg-6" id="refresh">
@@ -191,6 +195,9 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-2 right">
+                        <h4> Latencia   <h:outputText value="${dbbacom.latenciaVisitors}"/> min </h4>  
+                        </div>
                     </div>
                     <div class="row">
                         <div class="panel-body panel-shadow">
@@ -205,11 +212,27 @@
                                 <div class="panel-body panel-shadow panel-general">
                                 	<div class="col-sm-2">
                                         <h2> <h:outputText value="${dbbacom.totalVisitorsACOM}"/>  </h2>
-                                        <p class="general"> MIL VISITAS</p>
+                                        <c:if test="#{dbbacom.totalVisitorsACOM > dbbacomly.totalVisitorsACOM }" >
+                                        	<p class="general seta-cima"> MIL VISITAS</p>
+                                        </c:if>
+                                         <c:if test="#{dbbacomly.totalVisitorsACOM == dbbacom.totalVisitorsACOM }" >
+                                        	<p class="general"> -  MIL VISITAS</p>
+                                        </c:if>
+                                         <c:if test="#{dbbacomly.totalVisitorsACOM > dbbacom.totalVisitorsACOM }" >
+                                        	<p class="general seta-baixo"> MIL VISITAS</p>
+                                        </c:if>
                                     </div>
                                     <div class="col-sm-2">
                                         <h2> <h:outputText value="${dbbacom.totalTransaction}"/> % </h2>
-                                        <p class="general">MÉDIA DE CONVERSÃO</p>
+                                         <c:if test="#{dbbacom.totalTransaction > dbbacomly.totalSumTransaction }" >
+                                        	<p class="general seta-cima"> MÉDIA DE CONVERSÃO</p>
+                                        </c:if>
+                                         <c:if test="#{dbbacomly.totalSumTransaction == dbbacom.totalTransaction}" >
+                                        	<p class="general"> -  MÉDIA DE CONVERSÃO</p>
+                                        </c:if>
+                                         <c:if test="#{dbbacomly.totalSumTransaction > dbbacom.totalTransaction }" >
+                                        	<p class="general seta-baixo"> MÉDIA DE CONVERSÃO</p>
+                                        </c:if>
                                     </div>
                                     <div class="col-sm-4">
                                         	<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['corechart']}]}"></script>
@@ -219,11 +242,27 @@
                                     </div>
                                     <div class="col-sm-2">
                                         <h2> <h:outputText value="${dbbacom.totalBounce}"/> %</h2>
-                                        <p class="general">MÉDIA DE BOUNCE RATE</p>
+                                         <c:if test="#{dbbacom.totalBounce > dbbacomly.totalSumBounce }" >
+                                        	<p class="general seta-cima"> MÉDIA DE BOUNCE RATE</p>
+                                        </c:if>
+                                         <c:if test="#{dbbacomly.totalSumBounce == dbbacom.totalBounce}" >
+                                        	<p class="general"> -  MÉDIA DE BOUNCE RATE</p>
+                                        </c:if>
+                                         <c:if test="#{dbbacomly.totalSumBounce > dbbacom.totalBounce }" >
+                                        	<p class="general seta-baixo"> MÉDIA DE BOUNCE RATE</p>
+                                        </c:if>
                                     </div>
                                     <div class="col-sm-2">
                                         <h2> <h:outputText value="${dbbacom.totalAbandonCart}"/> % </h2>
-                                        <p class="general">MÉDIA DE ABANDONO</p>
+                                         <c:if test="#{dbbacom.totalAbandonCart > dbbacomly.totalSumAbandonCart }" >
+                                        	<p class="general seta-cima"> MÉDIA DE ABANDONO</p>
+                                        </c:if>
+                                         <c:if test="#{dbbacomly.totalSumAbandonCart == dbbacom.totalAbandonCart}" >
+                                        	<p class="general"> -  MÉDIA DE ABANDONO</p>
+                                        </c:if>
+                                         <c:if test="#{dbbacomly.totalSumAbandonCart > dbbacom.totalAbandonCart }" >
+                                        	<p class="general seta-baixo"> MÉDIA DE ABANDONO</p>
+                                        </c:if>
                                     </div>
                                 </div>
                         </div>

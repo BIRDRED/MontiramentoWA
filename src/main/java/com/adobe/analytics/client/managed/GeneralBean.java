@@ -9,6 +9,8 @@ public class GeneralBean {
 	public String lastYear;
 	public String refreshDate;
 	public String refreshHour;
+	public Integer compareMinutes;
+	public Integer compareHour;
 	
 	public String getDateAtual() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -74,6 +76,35 @@ public class GeneralBean {
 	public void setRefreshHour(String refreshHour) {
 		this.refreshHour = refreshHour;
 	}
+
+
+
+	public Integer getCompareMinutes() {
+		Calendar c = Calendar.getInstance();
+		Integer minutes = c.get(Calendar.MINUTE);
+		return minutes;
+	}
+
+	public void setCompareMinutes(Integer compareMinutes) {
+		this.compareMinutes = compareMinutes;
+	}
+
+
+
+	public Integer getCompareHour() {
+		Calendar c = Calendar.getInstance();
+		compareHour = c.get(Calendar.HOUR_OF_DAY);
+		return compareHour;
+	}
+
+
+
+	public void setCompareHour(Integer compareHour) {
+		this.compareHour = compareHour;
+	}
+	
+	
+	
 	
 	
 }
