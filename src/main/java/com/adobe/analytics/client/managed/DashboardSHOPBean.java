@@ -21,7 +21,7 @@ import com.adobe.analytics.client.report.DashboardReport;
 
 @ManagedBean
 @SessionScoped
-public class DashboardSUBABean implements Serializable {
+public class DashboardSHOPBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	//Variaveis de Listas 
@@ -59,9 +59,9 @@ public class DashboardSUBABean implements Serializable {
 	String date = sdf.format(new Date()).toString();
 	
 	
-	public DashboardSUBABean() throws IOException, InterruptedException {
+	public DashboardSHOPBean() throws IOException, InterruptedException {
 		 DashboardReport dbr = new DashboardReport();
-		 ReportResponse report =  dbr.getDashboard("b2w-suba", date);
+		 ReportResponse report =  dbr.getDashboard("b2w-shop", date);
 		 				//Inicialização de Variaveis
 			 				abandoncart = new ArrayList<AbandonCart>();
 			 				bouncerate = new ArrayList<BounceRate>();
@@ -247,8 +247,8 @@ public class DashboardSUBABean implements Serializable {
 	}
 
 	private void populateData() throws IOException, InterruptedException {
-		DashboardSUBABean dbb = new DashboardSUBABean();
-		DashboardSUBALYBean dbly = new DashboardSUBALYBean();
+		DashboardSHOPBean dbb = new DashboardSHOPBean();
+		DashboardSHOPLYBean dbly = new DashboardSHOPLYBean();
 		StringBuilder sbVisitors = new StringBuilder();
 		StringBuilder sbBounce = new StringBuilder();
 		StringBuilder sbAbandon = new StringBuilder();

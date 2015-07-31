@@ -39,7 +39,7 @@ public class VisitorsBean implements Serializable {
 					if(r.getCounts().get(0) != 0){
 							visitorsACOM = new BigDecimal(r.getCounts().get(0));
 					}
-					 Visitors vis = new Visitors(r.getHour().toString() , visitorsACOM);
+					 Visitors vis = new Visitors(r.getHour() , visitorsACOM);
 					 totalVisitorsACOM = totalVisitorsACOM.add(vis.getVisitors());
 					 visitors.add(vis);
 				 }

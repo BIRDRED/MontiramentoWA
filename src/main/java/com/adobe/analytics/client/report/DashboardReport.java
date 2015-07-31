@@ -14,8 +14,8 @@ import com.adobe.analytics.client.method.ReportSuiteMethods;
 
 public class DashboardReport {
 	
-	public ReportResponse getDashboardACOM(String reportsuite , String datapublicacao ) throws IOException, InterruptedException {
-		AnalyticsClient client = AnalyticsClient.authenticateWithSecret("api3.omniture.com");
+	public ReportResponse getDashboard(String reportsuite , String datapublicacao ) throws IOException, InterruptedException {
+		AnalyticsClient client = AnalyticsClient.authenticateWithSecret("web.analytics:B2W","b6d5a4c8791adbaac1bf790ffb926a44","api3.omniture.com");
 		ReportSuiteMethods suiteMethods = new ReportSuiteMethods(client);
 		ReportDescription desc = new ReportDescription();
 						  desc.setReportSuiteID(reportsuite);
@@ -43,7 +43,7 @@ public class DashboardReport {
 	public static void main(String[] args) {
 		DashboardReport drr = new DashboardReport();
 		try {
-			System.out.println(drr.getDashboardACOM("b2w-acom","2015-07-28").getReport().getMetrics().get(0).getLatency() /60);
+			System.out.println(drr.getDashboard("b2w-acom","2015-07-28").getReport().getMetrics().get(0).getLatency() /60);
 		} catch (IOException | InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

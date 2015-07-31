@@ -21,7 +21,7 @@ import com.adobe.analytics.client.report.DashboardReport;
 
 @ManagedBean
 @SessionScoped
-public class DashboardSUBABean implements Serializable {
+public class DashboardSOUBBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	//Variaveis de Listas 
@@ -59,9 +59,9 @@ public class DashboardSUBABean implements Serializable {
 	String date = sdf.format(new Date()).toString();
 	
 	
-	public DashboardSUBABean() throws IOException, InterruptedException {
+	public DashboardSOUBBean() throws IOException, InterruptedException {
 		 DashboardReport dbr = new DashboardReport();
-		 ReportResponse report =  dbr.getDashboard("b2w-suba", date);
+		 ReportResponse report =  dbr.getDashboard("b2w-soub", date);
 		 				//Inicialização de Variaveis
 			 				abandoncart = new ArrayList<AbandonCart>();
 			 				bouncerate = new ArrayList<BounceRate>();
@@ -247,8 +247,8 @@ public class DashboardSUBABean implements Serializable {
 	}
 
 	private void populateData() throws IOException, InterruptedException {
-		DashboardSUBABean dbb = new DashboardSUBABean();
-		DashboardSUBALYBean dbly = new DashboardSUBALYBean();
+		DashboardSOUBBean dbb = new DashboardSOUBBean();
+		DashboardSOUBLYBean dbly = new DashboardSOUBLYBean();
 		StringBuilder sbVisitors = new StringBuilder();
 		StringBuilder sbBounce = new StringBuilder();
 		StringBuilder sbAbandon = new StringBuilder();
@@ -322,7 +322,6 @@ public class DashboardSUBABean implements Serializable {
 						}
 				}
         chartTransaction = sbTrans.toString();
-        StringBuilder stringBuilder = new StringBuilder();
         			  sbAbandon.append("['Hora' ,");
         			  sbAbandon.append(gb.getDateAtual());
         			  sbAbandon.append(",");
@@ -330,17 +329,17 @@ public class DashboardSUBABean implements Serializable {
         			  sbAbandon.append("],");
 		for (int i=0; i < dbb.getAbandoncart().size(); i++) {
 			if(dbb.getAbandoncart().get(i).getAbandoncart().doubleValue() != 0 && dbly.getAbandoncart().get(i).getAbandoncart().doubleValue() != 0 ){
-					sbAbandon.append("['");
-					sbAbandon.append(dbb.getAbandoncart().get(i).getHour());
-					sbAbandon.append("h',");
-					sbAbandon.append(dbb.getAbandoncart().get(i).getAbandoncart());
-					sbAbandon.append(",");
-					sbAbandon.append(dbly.getAbandoncart().get(i).getAbandoncart());
-					sbAbandon.append("]");
-					sbAbandon.append(",");
+					  sbAbandon.append("['");
+					  sbAbandon.append(dbb.getAbandoncart().get(i).getHour());
+					  sbAbandon.append("h',");
+					  sbAbandon.append(dbb.getAbandoncart().get(i).getAbandoncart());
+					  sbAbandon.append(",");
+					  sbAbandon.append(dbly.getAbandoncart().get(i).getAbandoncart());
+					  sbAbandon.append("]");
+					  sbAbandon.append(",");
 				}
 			}
-		chartabandoncart = stringBuilder.toString();
+		chartabandoncart = sbAbandon.toString();
 	}
 
 }

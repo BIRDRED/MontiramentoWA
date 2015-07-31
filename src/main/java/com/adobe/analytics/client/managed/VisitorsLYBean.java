@@ -34,7 +34,7 @@ public class VisitorsLYBean implements Serializable {
 			 try {
 				for(ReportData r : v.getvisits("b2w-acom" , date).getReport().getData()){
 					 BigDecimal visitorsACOM = new BigDecimal(r.getCounts().get(0));
-					 Visitors vis = new Visitors(r.getHour().toString() , visitorsACOM);
+					 Visitors vis = new Visitors(r.getHour(), visitorsACOM);
 					 visitors.add(vis);
 				 }
 			} catch (IOException | InterruptedException e) {

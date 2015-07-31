@@ -49,4 +49,19 @@
    		<managed-bean-class>com.adobe.analytics.client.managed.DashboardSUBABean</managed-bean-class>
    		<managed-bean-scope>request</managed-bean-scope>
    </managed-bean>
+   <managed-bean>
+   		<managed-bean-name>dbbsubaly</managed-bean-name>
+   		<managed-bean-class>com.adobe.analytics.client.managed.DashboardSUBALYBean</managed-bean-class>
+   		<managed-bean-scope>request</managed-bean-scope>
+   </managed-bean>
+   <managed-bean>
+   		<managed-bean-name>dbbshop</managed-bean-name>
+   		<managed-bean-class>com.adobe.analytics.client.managed.DashboardSHOPBean</managed-bean-class>
+   		<managed-bean-scope>request</managed-bean-scope>
+   </managed-bean>
+   <managed-bean>
+   		<managed-bean-name>dbbshoply</managed-bean-name>
+   		<managed-bean-class>com.adobe.analytics.client.managed.DashboardSHOPLYBean</managed-bean-class>
+   		<managed-bean-scope>request</managed-bean-scope>
+   </managed-bean>
 </faces-config>

@@ -17,7 +17,6 @@ import com.adobe.analytics.client.entity.AbandonCart;
 import com.adobe.analytics.client.entity.BounceRate;
 import com.adobe.analytics.client.entity.Transaction;
 import com.adobe.analytics.client.entity.Visitors;
-import com.adobe.analytics.client.report.AbandonCartReport;
 import com.adobe.analytics.client.report.DashboardReport;
 
 @ManagedBean
@@ -62,7 +61,7 @@ public class DashboardACOMBean implements Serializable {
 	
 	public DashboardACOMBean() throws IOException, InterruptedException {
 		 DashboardReport dbr = new DashboardReport();
-		 ReportResponse report =  dbr.getDashboardACOM("b2w-acom", date);
+		 ReportResponse report =  dbr.getDashboard("b2w-acom", date);
 		 				//Inicialização de Variaveis
 			 				abandoncart = new ArrayList<AbandonCart>();
 			 				bouncerate = new ArrayList<BounceRate>();
@@ -323,21 +322,20 @@ public class DashboardACOMBean implements Serializable {
 				}
         chartTransactionACOM = sbTrans.toString();
         StringBuilder stringBuilder = new StringBuilder();
-					  stringBuilder.append("['Hora' ,");
-					  stringBuilder.append(gb.getDateAtual());
-					  stringBuilder.append(",");
-					  stringBuilder.append(gb.getLastYear());
-					  stringBuilder.append("],");
+        			  sbAbandon.append("['Hora' ,");
+        			  sbAbandon.append(gb.getDateAtual());
+        			  sbAbandon.append(",");
+        			  sbAbandon.append(gb.getLastYear());
+        			  sbAbandon.append("],");
 		for (int i=0; i < dbb.getAbandoncart().size(); i++) {
 			if(dbb.getAbandoncart().get(i).getAbandoncart().doubleValue() != 0 && dbly.getAbandoncart().get(i).getAbandoncart().doubleValue() != 0 ){
-					stringBuilder.append("['");
-					stringBuilder.append(dbb.getAbandoncart().get(i).getHour());
-					stringBuilder.append("h',");
-					stringBuilder.append(dbb.getAbandoncart().get(i).getAbandoncart());
-					stringBuilder.append(",");
-					stringBuilder.append(dbly.getAbandoncart().get(i).getAbandoncart());
-					stringBuilder.append("]");
-					stringBuilder.append(",");
+					sbAbandon.append("['");
+					sbAbandon.append(dbb.getAbandoncart().get(i).getHour());
+					sbAbandon.append("h',");
+					sbAbandon.append(dbb.getAbandoncart().get(i).getAbandoncart());
+					sbAbandon.append(",");
+					sbAbandon.append(dbly.getAbandoncart().get(i).getAbandoncart());
+					sbAbandon.append(",");
 				}
 			}
 		chartabandoncartACOM = stringBuilder.toString();

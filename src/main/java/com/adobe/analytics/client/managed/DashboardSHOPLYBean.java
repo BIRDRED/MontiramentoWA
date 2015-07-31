@@ -20,34 +20,34 @@ import com.adobe.analytics.client.report.DashboardReport;
 
 @ManagedBean
 @SessionScoped
-public class DashboardACOMLYBean implements Serializable {
+public class DashboardSHOPLYBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	//Variaveis de Listas 
 	List<BounceRate> bouncerate;
-	List<Visitors> visitors;
+	List<Visitors> visitorsList;
 	List<AbandonCart> abandoncart;
 	List<Transaction> transactions;
 
 	//Variaveis de Somas dos Totais
-		BigDecimal totalVisitorsACOM;
+		BigDecimal totalVisitors;
 		BigDecimal totalSumAbandonCart;
 		BigDecimal totalSumTransaction;
 		BigDecimal totalSumBounce;
 	
 	//Definição de Data
 	 
-	public DashboardACOMLYBean() {
+	public DashboardSHOPLYBean() {
 		 DashboardReport dbr = new DashboardReport();
 		 GeneralBean gb = new GeneralBean();
 		 				//Inicialização de Variaveis
 			 				abandoncart = new ArrayList<AbandonCart>();
 			 				bouncerate = new ArrayList<BounceRate>();
-			 				visitors =  new ArrayList<Visitors>();
+			 				visitorsList =  new ArrayList<Visitors>();
 			 				transactions =  new ArrayList<Transaction>();
 			 				
 			 			//Inicialização de Soma 
-				 			totalVisitorsACOM = BigDecimal.ZERO;
+				 			totalVisitors = BigDecimal.ZERO;
 			 				totalSumAbandonCart = BigDecimal.ZERO;
 			 				totalSumTransaction = BigDecimal.ZERO;
 			 				totalSumBounce = BigDecimal.ZERO;
@@ -58,17 +58,17 @@ public class DashboardACOMLYBean implements Serializable {
 				 			    calendar.set(Calendar.YEAR, ano);
 				 			   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				 String date = sdf.format(calendar.getTime()).toString();
-				for(ReportData rd : dbr.getDashboard("b2w-acom", date).getReport().getData()){
+				for(ReportData rd : dbr.getDashboard("b2w-shop", date).getReport().getData()){
 					//Taxas de Relatório
 						BigDecimal abandonCart = BigDecimal.ZERO;
-						BigDecimal visitorsACOM = BigDecimal.ZERO;
+						BigDecimal visitors = BigDecimal.ZERO;
 						BigDecimal transactionpct = BigDecimal.ZERO;
 						BigDecimal bounceratepct = BigDecimal.ZERO;
 						
 					//Faz a soma dos Variaveis
 					 if(rd.getCounts().get(0)!=0 && rd.getCounts().get(1)!=0 && rd.getCounts().get(2)!=0 && rd.getCounts().get(3)!=0 &&  rd.getCounts().get(4)!=0){
 						 	abandonCart = new BigDecimal((1 - (rd.getCounts().get(1) /rd.getCounts().get(2))) * 100);
-						 	visitorsACOM = new BigDecimal(rd.getCounts().get(0));
+						 	visitors = new BigDecimal(rd.getCounts().get(0));
 						 	transactionpct = new BigDecimal((rd.getCounts().get(1) /rd.getCounts().get(0)) * 100);
 						 	bounceratepct = new BigDecimal((rd.getCounts().get(3) /rd.getCounts().get(4)) * 100);
 						 	
@@ -78,13 +78,13 @@ public class DashboardACOMLYBean implements Serializable {
 					 //Instancia dos dados
 					 AbandonCart abandon =  new AbandonCart(hour, abandonCart.setScale(2, BigDecimal.ROUND_UP), rd.getCounts().get(2), rd.getCounts().get(1));
 					 BounceRate bounce = new BounceRate(hour, bounceratepct.setScale(2, BigDecimal.ROUND_UP));
-					 Visitors vis = new Visitors(rd.getHour(), visitorsACOM);
-					 Transaction trans = new Transaction(hour,visitorsACOM.doubleValue(), rd.getCounts().get(1), transactionpct.setScale(2, BigDecimal.ROUND_UP));
+					 Visitors vis = new Visitors(rd.getHour(), visitors);
+					 Transaction trans = new Transaction(hour,visitors.doubleValue(), rd.getCounts().get(1), transactionpct.setScale(2, BigDecimal.ROUND_UP));
 					
 					//Soma dos Totais 
 					 	totalSumAbandonCart = totalSumAbandonCart.add(abandon.getAbandoncart());
 					 	if(rd.getHour() < gb.getCompareHour()){
-					 		totalVisitorsACOM = totalVisitorsACOM.add(vis.getVisitors());
+					 		totalVisitors = totalVisitors.add(vis.getVisitors());
 					 	}
 					 	totalSumTransaction = totalSumTransaction.add(trans.getTransactionpct());
 					 	totalSumBounce = totalSumBounce.add(bounce.getBouncerate());
@@ -92,7 +92,7 @@ public class DashboardACOMLYBean implements Serializable {
 		 			//Adiciona na Lista
 					 	abandoncart.add(abandon);
 					 	bouncerate.add(bounce);
-					 	visitors.add(vis);
+					 	visitorsList.add(vis);
 					 	transactions.add(trans);
 					 	
 				 }
@@ -110,12 +110,14 @@ public class DashboardACOMLYBean implements Serializable {
 		this.bouncerate = bouncerate;
 	}
 
-	public List<Visitors> getVisitors() {
-		return visitors;
+	
+
+	public List<Visitors> getVisitorsList() {
+		return visitorsList;
 	}
 
-	public void setVisitors(List<Visitors> visitors) {
-		this.visitors = visitors;
+	public void setVisitorsList(List<Visitors> visitorsList) {
+		this.visitorsList = visitorsList;
 	}
 
 	public List<AbandonCart> getAbandoncart() {
@@ -134,16 +136,16 @@ public class DashboardACOMLYBean implements Serializable {
 		this.transactions = transactions;
 	}
 
-	public Integer getTotalVisitorsACOM() {
+	public Integer getTotalVisitors() {
 		BigDecimal tv = BigDecimal.ZERO;
-		if(totalVisitorsACOM.toString().length() > 3){
-			tv = new BigDecimal((totalVisitorsACOM.doubleValue()/1000));
+		if(totalVisitors.toString().length() > 3){
+			tv = new BigDecimal((totalVisitors.doubleValue()/1000));
 		}
 		return tv.intValue();
 	}
 
-	public void setTotalVisitorsACOM(BigDecimal totalVisitorsACOM) {
-		this.totalVisitorsACOM = totalVisitorsACOM;
+	public void setTotalVisitors(BigDecimal totalVisitors) {
+		this.totalVisitors = totalVisitors;
 	}
 
 	public BigDecimal getTotalSumAbandonCart() {
@@ -170,11 +172,11 @@ public class DashboardACOMLYBean implements Serializable {
 		this.totalSumBounce = totalSumBounce;
 	}
 	public static void main(String[] args) {
-		DashboardACOMLYBean daly =  new DashboardACOMLYBean();
+		DashboardSHOPLYBean daly =  new DashboardSHOPLYBean();
 		System.out.println(daly.getTotalSumAbandonCart());
 		System.out.println(daly.getTotalSumBounce());
 		System.out.println(daly.getTotalSumTransaction());
-		System.out.println(daly.getTotalVisitorsACOM());
+		System.out.println(daly.getTotalVisitors());
 	}
 	
 }

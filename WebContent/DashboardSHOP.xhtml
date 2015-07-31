@@ -11,10 +11,10 @@
 	<meta http-equiv="refresh" content="720"/> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="DashBoard Real Time SUBA"/>
+    <meta name="description" content="DashBoard Real Time SHOP"/>
     <meta name="author" content="Gustavo Melo"/>
     
-	<title>Dashboard RealTime SUBA</title>
+	<title>Dashboard RealTime SHOP</title>
 	<!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     
@@ -36,14 +36,14 @@
 	      data.addColumn('number', #{gb.dateAtual});
 	      data.addColumn('number', #{gb.lastYear});
 	      data.addRows([
-                #{dbbsuba.chartVisitors}
+                #{dbbshop.chartVisitors}
 	       ]);
 
 	      var options = {
 	    	        focusTarget: 'category',
 	    	        width: 1750,
 	    	        height: 400,
-	    	        colors: ['#6DCAED','#018CC1' , '#CCC'],
+	    	        colors: ['#FDA469','#F60' , '#CCC'],
 	    	        legend: { position: 'top', maxLines: 3 , align : 'center' },
 	    	        hAxis: {
 	    	          format: 'h:mm a',
@@ -88,11 +88,11 @@
 	    google.setOnLoadCallback(drawChart);
 	    function drawChart() {
 	      var data = google.visualization.arrayToDataTable([
-				#{dbbsuba.chartTransaction}
+				#{dbbshop.chartTransaction}
 				]);
 	
 	      var options = {
-	    	colors: ['#018CC1' , '#888'],
+	    	colors: ['#F60' , '#888'],
 	    	legend: { position: 'top', maxLines: 3 , align : 'center' },
 	        hAxis: {titleTextStyle: {color: '#333'}},
 	        vAxis: {minValue: 0}
@@ -106,11 +106,11 @@
 	    google.setOnLoadCallback(drawChart);
 	    function drawChart() {
 	      var data = google.visualization.arrayToDataTable([
-					#{dbbsuba.chartBouncerate}
+					#{dbbshop.chartBouncerate}
 				]);
 	
 	      var options = {
-	    	colors: ['#018CC1' , '#888'],
+	    	colors: ['#F60' , '#888'],
 	  	    legend: { position: 'top', maxLines: 3 , align : 'center' },
 	        hAxis: {titleTextStyle: {color: '#333'}},
 	        vAxis: {minValue: 0}
@@ -124,11 +124,11 @@
 	    google.setOnLoadCallback(drawChart);
 	    function drawChart() {
 	      var data = google.visualization.arrayToDataTable([
-					#{dbbsuba.chartabandoncart}
+					#{dbbshop.chartabandoncart}
 				]);
 	
 	      var options = {
-	        colors: ['#018CC1','#888'],
+	        colors: ['#F60','#888'],
 	        legend: { position: 'top', maxLines: 3 , align : 'center' },
 	        hAxis: {titleTextStyle: {color: '#333'}},
 	        vAxis: {minValue: 0}
@@ -143,7 +143,7 @@
     function drawChart() {
 
       var data = google.visualization.arrayToDataTable([
-			#{tvb.chartshareVisitorsSUBA}
+			#{tvb.chartshareVisitorsSHOP}
       ]);
 
       var options = {
@@ -155,7 +155,7 @@
         tooltip: { trigger: 'none' },
         chartArea: {left:0,top:2,width:'95%',height:'95%'},
         slices: {
-          0: { color: '#018CC1' },
+          0: { color: '#F60' },
           1: { color: 'transparent' }
         }
       };
@@ -172,7 +172,7 @@
 	<div id="wrapper">
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		            <div class="navbar-header">
-		            	<img src="img/Logo-SUBA.png" class="logo"/>
+		            	<img src="img/Logo-SHOP.png" class="logo"/>
 		                <p class="navbar-brand logo-name"> Monitoramento WA </p>
 		            </div>
 		         <div class="col-lg-6" id="refresh">
@@ -183,7 +183,7 @@
             <div class="container-fluid">
                 <div class="col-lg-12">
                     <div class="row">
-                        <div class="panel-heading col-lg-2 panel-header suba-bg">
+                        <div class="panel-heading col-lg-2 panel-header shop-bg">
                             <div class="panel-title">
                                 <div class="col-lg-2">
                                     <h3 class="panel-title">
@@ -198,7 +198,7 @@
                             </div>
                         </div>
                         <div class="col-lg-2 right">
-                        <h4> Latencia   <h:outputText value="${dbbsuba.latenciaVisitors}"/> min </h4>  
+                        <h4> Latencia   <h:outputText value="${dbbshop.latenciaVisitors}"/> min </h4>  
                         </div>
                     </div>
                     <div class="row">
@@ -213,26 +213,26 @@
                         <div class="col-lg-12">
                                 <div class="panel-body panel-shadow panel-general">
                                 	<div class="col-lg-2">
-                                        <h2> <h:outputText value="${dbbsuba.totalVisitors}"/>  </h2>
-                                        <c:if test="#{dbbsuba.totalVisitors > dbbsubaly.totalVisitors }" >
+                                        <h2> <h:outputText value="${dbbshop.totalVisitors}"/>  </h2>
+                                        <c:if test="#{dbbshop.totalVisitors > dbbshoply.totalVisitors }" >
                                         	<p class="general seta-cima"> MIL VISITAS</p>
                                         </c:if>
-                                         <c:if test="#{dbbsubaly.totalVisitors == dbbsuba.totalVisitors }" >
+                                         <c:if test="#{dbbshoply.totalVisitors == dbbshop.totalVisitors }" >
                                         	<p class="general"> -  MIL VISITAS</p>
                                         </c:if>
-                                         <c:if test="#{dbbsubaly.totalVisitors > dbbsuba.totalVisitors }" >
+                                         <c:if test="#{dbbshoply.totalVisitors > dbbshop.totalVisitors }" >
                                         	<p class="general seta-baixo"> MIL VISITAS</p>
                                         </c:if>
                                     </div>
                                     <div class="col-lg-2">
-                                        <h2> <h:outputText value="${dbbsuba.totalTransaction}"/> % </h2>
-                                         <c:if test="#{dbbsuba.totalTransaction > dbbsubaly.totalSumTransaction }" >
+                                        <h2> <h:outputText value="${dbbshop.totalTransaction}"/> % </h2>
+                                         <c:if test="#{dbbshop.totalTransaction > dbbshoply.totalSumTransaction }" >
                                         	<p class="general seta-cima"> MÉDIA DE CONVERSÃO</p>
                                         </c:if>
-                                         <c:if test="#{dbbsubaly.totalSumTransaction == dbbsuba.totalTransaction}" >
+                                         <c:if test="#{dbbshoply.totalSumTransaction == dbbshop.totalTransaction}" >
                                         	<p class="general"> -  MÉDIA DE CONVERSÃO</p>
                                         </c:if>
-                                         <c:if test="#{dbbsubaly.totalSumTransaction > dbbsuba.totalTransaction }" >
+                                         <c:if test="#{dbbshoply.totalSumTransaction > dbbshop.totalTransaction }" >
                                         	<p class="general seta-baixo"> MÉDIA DE CONVERSÃO</p>
                                         </c:if>
                                     </div>
@@ -240,31 +240,31 @@
                                     <div class="col-lg-2">
                                         	<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['corechart']}]}"></script>
        										<div id="chart_share" style="width: 300px; height: 100px;"/>
-       										<p id="pctshare"> <h:outputText value="${tvb.shareVisitorsSUBA}"/> % </p>
+       										<p id="pctshare"> <h:outputText value="${tvb.shareVisitorsSHOP}"/> % </p>
        										<p class="general sharevisits">SHARE DE VISITAS B2W</p>
                                     </div>
                                     <div class="col-lg-1"/>
                                     <div class="col-lg-2">
-                                        <h2> <h:outputText value="${dbbsuba.totalBounce}"/> %</h2>
-                                         <c:if test="#{dbbsuba.totalBounce > dbbsubaly.totalSumBounce }" >
+                                        <h2> <h:outputText value="${dbbshop.totalBounce}"/> %</h2>
+                                         <c:if test="#{dbbshop.totalBounce > dbbshoply.totalSumBounce }" >
                                         	<p class="general seta-baixo"> MÉDIA DE BOUNCE RATE</p>
                                         </c:if>
-                                         <c:if test="#{dbbsubaly.totalSumBounce == dbbsuba.totalBounce}" >
+                                         <c:if test="#{dbbshoply.totalSumBounce == dbbshop.totalBounce}" >
                                         	<p class="general"> -  MÉDIA DE BOUNCE RATE</p>
                                         </c:if>
-                                         <c:if test="#{dbbsubaly.totalSumBounce > dbbsuba.totalBounce }" >
+                                         <c:if test="#{dbbshoply.totalSumBounce > dbbshop.totalBounce }" >
                                         	<p class="general seta-cima"> MÉDIA DE BOUNCE RATE</p>
                                         </c:if>
                                     </div>
                                     <div class="col-lg-2">
-                                        <h2> <h:outputText value="${dbbsuba.totalAbandonCart}"/> % </h2>
-                                         <c:if test="#{dbbsuba.totalAbandonCart > dbbsubaly.totalSumAbandonCart }" >
+                                        <h2> <h:outputText value="${dbbshop.totalAbandonCart}"/> % </h2>
+                                         <c:if test="#{dbbshop.totalAbandonCart > dbbshoply.totalSumAbandonCart }" >
                                         	<p class="general seta-baixo"> MÉDIA DE ABANDONO</p>
                                         </c:if>
-                                         <c:if test="#{dbbsubaly.totalSumAbandonCart == dbbsuba.totalAbandonCart}" >
+                                         <c:if test="#{dbbshoply.totalSumAbandonCart == dbbshop.totalAbandonCart}" >
                                         	<p class="general"> -  MÉDIA DE ABANDONO</p>
                                         </c:if>
-                                         <c:if test="#{dbbsubaly.totalSumAbandonCart > dbbsuba.totalAbandonCart }" >
+                                         <c:if test="#{dbbshoply.totalSumAbandonCart > dbbshop.totalAbandonCart }" >
                                         	<p class="general seta-cima"> MÉDIA DE ABANDONO</p>
                                         </c:if>
                                     </div>
@@ -277,7 +277,7 @@
                             <div class="col-lg-4">
                                 <div class="panel-body panel-shadow little-panel">
                                     <div class="row">
-                                        <h4 class="panel-letter-red suba">
+                                        <h4 class="panel-letter-red shop">
                                             <i class="material-icons md-27">attach_money</i>
 
                                          CONVERSÃO</h4>
@@ -287,9 +287,9 @@
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                <div class="panel-body panel-shadow little-panel suba">
+                                <div class="panel-body panel-shadow little-panel shop">
                                     <div class="row">
-                                        <h4 class="panel-letter-red suba">
+                                        <h4 class="panel-letter-red shop">
                                             <i class="material-icons md-27">trending_down</i>
 
                                          BOUNCE RATE</h4>
@@ -301,7 +301,7 @@
                             <div class="col-lg-4">
                                 <div class="panel-body panel-shadow little-panel">
                                     <div class="row">
-                                        <h4 class="panel-letter-red suba">
+                                        <h4 class="panel-letter-red shop">
                                             <i class="material-icons md-27">shopping_cart</i>
 
                                          ABANDONO CARRINHO</h4>
