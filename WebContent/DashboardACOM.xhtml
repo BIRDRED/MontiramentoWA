@@ -247,25 +247,25 @@
                                     <div class="col-lg-2">
                                         <h2> <h:outputText value="${dbbacom.totalBounce}"/> %</h2>
                                          <c:if test="#{dbbacom.totalBounce > dbbacomly.totalSumBounce }" >
-                                        	<p class="general seta-cima"> MÉDIA DE BOUNCE RATE</p>
+                                        	<p class="general seta-baixo"> MÉDIA DE BOUNCE RATE</p>
                                         </c:if>
                                          <c:if test="#{dbbacomly.totalSumBounce == dbbacom.totalBounce}" >
                                         	<p class="general"> -  MÉDIA DE BOUNCE RATE</p>
                                         </c:if>
                                          <c:if test="#{dbbacomly.totalSumBounce > dbbacom.totalBounce }" >
-                                        	<p class="general seta-baixo"> MÉDIA DE BOUNCE RATE</p>
+                                        	<p class="general seta-cima"> MÉDIA DE BOUNCE RATE</p>
                                         </c:if>
                                     </div>
                                     <div class="col-lg-2">
                                         <h2> <h:outputText value="${dbbacom.totalAbandonCart}"/> % </h2>
                                          <c:if test="#{dbbacom.totalAbandonCart > dbbacomly.totalSumAbandonCart }" >
-                                        	<p class="general seta-cima"> MÉDIA DE ABANDONO</p>
+                                        	<p class="general seta-baixo"> MÉDIA DE ABANDONO</p>
                                         </c:if>
                                          <c:if test="#{dbbacomly.totalSumAbandonCart == dbbacom.totalAbandonCart}" >
                                         	<p class="general"> -  MÉDIA DE ABANDONO</p>
                                         </c:if>
                                          <c:if test="#{dbbacomly.totalSumAbandonCart > dbbacom.totalAbandonCart }" >
-                                        	<p class="general seta-baixo"> MÉDIA DE ABANDONO</p>
+                                        	<p class="general seta-cima"> MÉDIA DE ABANDONO</p>
                                         </c:if>
                                     </div>
                                 </div>

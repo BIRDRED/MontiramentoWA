@@ -64,4 +64,14 @@
    		<managed-bean-class>com.adobe.analytics.client.managed.DashboardSHOPLYBean</managed-bean-class>
    		<managed-bean-scope>request</managed-bean-scope>
    </managed-bean>
+   <managed-bean>
+   		<managed-bean-name>dbbsoub</managed-bean-name>
+   		<managed-bean-class>com.adobe.analytics.client.managed.DashboardSHOPBean</managed-bean-class>
+   		<managed-bean-scope>request</managed-bean-scope>
+   </managed-bean>
+   <managed-bean>
+   		<managed-bean-name>dbbsoubly</managed-bean-name>
+   		<managed-bean-class>com.adobe.analytics.client.managed.DashboardSHOPLYBean</managed-bean-class>
+   		<managed-bean-scope>request</managed-bean-scope>
+   </managed-bean>
 </faces-config>

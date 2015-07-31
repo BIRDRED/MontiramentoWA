@@ -253,7 +253,14 @@ public class DashboardSOUBBean implements Serializable {
 		StringBuilder sbBounce = new StringBuilder();
 		StringBuilder sbAbandon = new StringBuilder();
 		StringBuilder sbTrans =  new StringBuilder();
-		for (int i=0; i < dbb.getVisitorslist().size(); i++) {
+		Integer countVisitors = dbb.getVisitorslist().size();	
+		Integer countBounce = dbb.getBouncerate().size();
+		Integer countAbandon = dbb.getAbandoncart().size();
+		Integer countTrans = dbb.getTransactions().size();
+		if( countVisitors == 0){
+			countVisitors = countVisitors + 1;
+		}
+		for (int i=0; i < countVisitors; i++) {
 			if(dbb.getVisitorslist().get(i).getVisitors().doubleValue() != 0 && dbly.getVisitorsList().get(i).getVisitors().doubleValue() != 0 ){
 						sbVisitors.append("[{ v: [");
 						sbVisitors.append(dbb.getVisitorslist().get(i).getHour());
@@ -291,7 +298,10 @@ public class DashboardSOUBBean implements Serializable {
 			sbBounce.append(",");
 			sbBounce.append(gb.getLastYear());
 			sbBounce.append("],");
-				for (int i=0; i < dbb.getBouncerate().size(); i++) {
+			if( countBounce == 0){
+				countBounce = countBounce + 1;
+			}
+				for (int i=0; i < countBounce; i++) {
 					if(dbb.getBouncerate().get(i).getBouncerate().doubleValue() != 0 && dbly.getBouncerate().get(i).getBouncerate().doubleValue() != 0 ){
 						sbBounce.append("['");
 						sbBounce.append(dbb.getBouncerate().get(i).getHour());
@@ -309,7 +319,10 @@ public class DashboardSOUBBean implements Serializable {
 						sbTrans.append(",");
 						sbTrans.append(gb.getLastYear());
 						sbTrans.append("],");
-				for (int i=0; i < dbb.getTransactions().size(); i++) {
+						if( countTrans == 0){
+							countTrans = countTrans + 1;
+						}
+				for (int i=0; i < countTrans; i++) {
 					if(dbb.getTransactions().get(i).getTransactionpct().doubleValue() != 0 && dbly.getTransactions().get(i).getTransactionpct().doubleValue() != 0 ){		
 							sbTrans.append("['");
 							sbTrans.append(dbb.getTransactions().get(i).getHour());
@@ -327,6 +340,9 @@ public class DashboardSOUBBean implements Serializable {
         			  sbAbandon.append(",");
         			  sbAbandon.append(gb.getLastYear());
         			  sbAbandon.append("],");
+        			  if( countAbandon == 0){
+							countAbandon = countAbandon + 1;
+						}
 		for (int i=0; i < dbb.getAbandoncart().size(); i++) {
 			if(dbb.getAbandoncart().get(i).getAbandoncart().doubleValue() != 0 && dbly.getAbandoncart().get(i).getAbandoncart().doubleValue() != 0 ){
 					  sbAbandon.append("['");
@@ -340,6 +356,14 @@ public class DashboardSOUBBean implements Serializable {
 				}
 			}
 		chartabandoncart = sbAbandon.toString();
+	}
+	
+	public static void main(String[] args) throws IOException, InterruptedException {
+		DashboardSOUBBean dbb = new DashboardSOUBBean();
+		System.out.println(dbb.getChartabandoncart());
+		System.out.println(dbb.getChartBouncerate());
+		System.out.println(dbb.getChartVisitors());
+		System.out.println(dbb.getChartTransaction());
 	}
 
 }
