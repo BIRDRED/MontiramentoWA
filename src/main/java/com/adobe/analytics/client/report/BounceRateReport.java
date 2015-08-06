@@ -15,7 +15,7 @@ import com.adobe.analytics.client.method.ReportSuiteMethods;
 public class BounceRateReport {
 	
 	public ReportResponse getBounceRate(String reportsuite,String datapublicacao) throws IOException, InterruptedException {
-		AnalyticsClient client = AnalyticsClient.authenticateWithSecret(,"api3.omniture.com");
+		AnalyticsClient client = AnalyticsClient.authenticateWithSecret("web.analytics:B2W","b6d5a4c8791adbaac1bf790ffb926a44","api3.omniture.com");
 		ReportSuiteMethods suiteMethods = new ReportSuiteMethods(client);
 		ReportDescription desc = new ReportDescription();
 						  desc.setReportSuiteID(reportsuite);
