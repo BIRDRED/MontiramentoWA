@@ -80,6 +80,7 @@ public class DashboardSOUBBean implements Serializable {
 		 				
 		 			//Latencia dos Dados
 		 				latenciaVisitors = new BigDecimal(report.getReport().getMetrics().get(0).getLatency());
+		 	if(report.getReport().getTotals().get(0) > 0  && report.getReport().getTotals().get(0) > 0){
 				for(ReportData rd : report.getReport().getData()){
 					//Taxas de Relatório
 						BigDecimal abandonCart = BigDecimal.ZERO;
@@ -116,7 +117,7 @@ public class DashboardSOUBBean implements Serializable {
 					 	transactions.add(trans);
 					 	
 				 }
-			
+		 	}
 	}
 	
 	public List<BounceRate> getBouncerate() {

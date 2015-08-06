@@ -80,7 +80,8 @@ public class DashboardACOMBean implements Serializable {
 		 				
 		 			//Latencia dos Dados
 		 				latenciaVisitors = new BigDecimal(report.getReport().getMetrics().get(0).getLatency());
-				for(ReportData rd : report.getReport().getData()){
+		 	if(report.getReport().getTotals().get(0) > 0  && report.getReport().getTotals().get(0) > 0){
+		 		for(ReportData rd : report.getReport().getData()){
 					//Taxas de Relatório
 						BigDecimal abandonCart = BigDecimal.ZERO;
 						BigDecimal visitorsACOM = BigDecimal.ZERO;
@@ -116,7 +117,7 @@ public class DashboardACOMBean implements Serializable {
 					 	transactions.add(trans);
 					 	
 				 }
-			
+		 	}
 	}
 	
 	public List<BounceRate> getBouncerate() {
@@ -260,7 +261,7 @@ public class DashboardACOMBean implements Serializable {
 			countVisitors = countVisitors + 1;
 		}
 		for (int i=0; i < countVisitors; i++) {
-			if(dbb.getVisitors().get(i).getVisitors().doubleValue() != 0 && dbly.getVisitors().get(i).getVisitors().doubleValue() != 0 ){
+			if(dbb.getVisitors().get(i).getVisitors().doubleValue() > 0 && dbly.getVisitors().get(i).getVisitors().doubleValue() > 0 ){
 						sbVisitors.append("[{ v: [");
 						sbVisitors.append(dbb.getVisitors().get(i).getHour());
 						sbVisitors.append(", 0, 0], f: '");
@@ -355,10 +356,6 @@ public class DashboardACOMBean implements Serializable {
 				}
 			}
 		chartabandoncartACOM = sbAbandon.toString();
-	}
-	public static void main(String[] args) throws IOException, InterruptedException {
-		DashboardACOMBean dbb = new DashboardACOMBean();
-		System.out.println(dbb.getChartabandoncartACOM());
 	}
 
 }

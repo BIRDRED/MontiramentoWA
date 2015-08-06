@@ -208,6 +208,15 @@ ul.message-dropdown {
     border-top-right-radius: 12px;
 }
 
+h1{
+    font-size: 23px;
+    margin-top: 5px;
+    margin-bottom: 0;
+    margin-left: 0%;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+}
+
 h2{
 	font-size: 45px;
 	font-family: 'Roboto', sans-serif;
@@ -234,6 +243,9 @@ h4{
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
 }
+
+
+
 .panel-letter{
         color: #FFFFFF;
 }
@@ -254,8 +266,9 @@ h4{
 #refresh{ 
   float: right;
   margin-right: -5%;
+  margin-top: 1%;
   color: #ffffff;
-  padding-top: 1%;
+  /*padding-top: 1%;*/
 }
 #refresh h4{
 	font-size: 18px;
@@ -301,12 +314,12 @@ h4{
   content: "";
   display: inline-block;
   vertical-align: middle;
-  margin-right: 10px;
+  margin-right: 16px;
   width: 0; 
   height: 0; 
-  border-left: 9px solid transparent;
-  border-right: 9px solid transparent;
-  border-bottom: 9px solid rgb(7, 166, 64);
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid rgb(7, 166, 64);
 }
 
 /**
@@ -316,12 +329,12 @@ h4{
   content: "";
   display: inline-block;
   vertical-align: middle;
-  margin-right: 10px;
+  margin-right: 16px;
   width: 0; 
   height: 0; 
-  border-left: 9px solid transparent;
-  border-right: 9px solid transparent;
-  border-top: 9px solid #f00;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid #f00;
 }
 
 .right{
@@ -346,5 +359,34 @@ h4{
 	color : #660dd1;
 }
 
+/**
+*** Seta para CIMA
+**/
+.seta-cima-diff:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 16px;
+  width: 0; 
+  height: 0; 
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid #f00;
+}
+
+/**
+*** Seta para BAIXO
+**/
+.seta-baixo-diff:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 16px;
+  width: 0; 
+  height: 0; 
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid rgb(7, 166, 64);
+}
 
 

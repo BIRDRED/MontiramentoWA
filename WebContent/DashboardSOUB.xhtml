@@ -8,7 +8,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 <h:head>
-	<meta http-equiv="refresh" content="720"/> 
+	<meta http-equiv="refresh" content="540"/> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="description" content="DashBoard Real Time SOUB"/>
@@ -247,25 +247,25 @@
                                     <div class="col-lg-2">
                                         <h2> <h:outputText value="${dbbsoub.totalBounce}"/> %</h2>
                                          <c:if test="#{dbbsoub.totalBounce > dbbsoubly.totalSumBounce }" >
-                                        	<p class="general seta-baixo"> MÉDIA DE BOUNCE RATE</p>
+                                        	<p class="general seta-baixo-diff"> MÉDIA DE BOUNCE RATE</p>
                                         </c:if>
                                          <c:if test="#{dbbsoubly.totalSumBounce == dbbsoub.totalBounce}" >
                                         	<p class="general"> -  MÉDIA DE BOUNCE RATE</p>
                                         </c:if>
                                          <c:if test="#{dbbsoubly.totalSumBounce > dbbsoub.totalBounce }" >
-                                        	<p class="general seta-cima"> MÉDIA DE BOUNCE RATE</p>
+                                        	<p class="general seta-cima-diff"> MÉDIA DE BOUNCE RATE</p>
                                         </c:if>
                                     </div>
                                     <div class="col-lg-2">
                                         <h2> <h:outputText value="${dbbsoub.totalAbandonCart}"/> % </h2>
                                          <c:if test="#{dbbsoub.totalAbandonCart > dbbsoubly.totalSumAbandonCart }" >
-                                        	<p class="general seta-baixo"> MÉDIA DE ABANDONO</p>
+                                        	<p class="general seta-baixo-diff"> MÉDIA DE ABANDONO</p>
                                         </c:if>
                                          <c:if test="#{dbbsoubly.totalSumAbandonCart == dbbsoub.totalAbandonCart}" >
                                         	<p class="general"> -  MÉDIA DE ABANDONO</p>
                                         </c:if>
                                          <c:if test="#{dbbsoubly.totalSumAbandonCart > dbbsoub.totalAbandonCart }" >
-                                        	<p class="general seta-cima"> MÉDIA DE ABANDONO</p>
+                                        	<p class="general seta-cima-diff"> MÉDIA DE ABANDONO</p>
                                         </c:if>
                                     </div>
                                 </div>

@@ -176,7 +176,7 @@
 		                <p class="navbar-brand logo-name"> Monitoramento WA </p>
 		            </div>
 		         <div class="col-lg-6" id="refresh">
-	             	<h4> Atualizado em   <h:outputText value="${gb.refreshDate}"/> as <h:outputText value="${gb.refreshHour}"/> </h4>            	    		
+	             	<h1> Atualizado em   <h:outputText value="${gb.refreshDate}"/> as <h:outputText value="${gb.refreshHour}"/> </h1>            	    		
             	</div>
         </nav>    
         <div id="page-wrapper">
@@ -247,25 +247,25 @@
                                     <div class="col-lg-2">
                                         <h2> <h:outputText value="${dbbacom.totalBounce}"/> %</h2>
                                          <c:if test="#{dbbacom.totalBounce > dbbacomly.totalSumBounce }" >
-                                        	<p class="general seta-baixo"> MÉDIA DE BOUNCE RATE</p>
+                                        	<p class="general seta-baixo-diff"> MÉDIA DE BOUNCE RATE</p>
                                         </c:if>
                                          <c:if test="#{dbbacomly.totalSumBounce == dbbacom.totalBounce}" >
                                         	<p class="general"> -  MÉDIA DE BOUNCE RATE</p>
                                         </c:if>
                                          <c:if test="#{dbbacomly.totalSumBounce > dbbacom.totalBounce }" >
-                                        	<p class="general seta-cima"> MÉDIA DE BOUNCE RATE</p>
+                                        	<p class="general seta-cima-diff"> MÉDIA DE BOUNCE RATE</p>
                                         </c:if>
                                     </div>
                                     <div class="col-lg-2">
                                         <h2> <h:outputText value="${dbbacom.totalAbandonCart}"/> % </h2>
                                          <c:if test="#{dbbacom.totalAbandonCart > dbbacomly.totalSumAbandonCart }" >
-                                        	<p class="general seta-baixo"> MÉDIA DE ABANDONO</p>
+                                        	<p class="general seta-baixo-diff"> MÉDIA DE ABANDONO</p>
                                         </c:if>
                                          <c:if test="#{dbbacomly.totalSumAbandonCart == dbbacom.totalAbandonCart}" >
                                         	<p class="general"> -  MÉDIA DE ABANDONO</p>
                                         </c:if>
                                          <c:if test="#{dbbacomly.totalSumAbandonCart > dbbacom.totalAbandonCart }" >
-                                        	<p class="general seta-cima"> MÉDIA DE ABANDONO</p>
+                                        	<p class="general seta-cima-diff"> MÉDIA DE ABANDONO</p>
                                         </c:if>
                                     </div>
                                 </div>

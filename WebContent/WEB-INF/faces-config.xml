@@ -74,4 +74,24 @@
    		<managed-bean-class>com.adobe.analytics.client.managed.DashboardSHOPLYBean</managed-bean-class>
    		<managed-bean-scope>request</managed-bean-scope>
    </managed-bean>
+   <managed-bean>
+   		<managed-bean-name>eparacom</managed-bean-name>
+   		<managed-bean-class>com.adobe.analytics.client.managed.EparACOMBean</managed-bean-class>
+   		<managed-bean-scope>request</managed-bean-scope>
+   </managed-bean>
+   <managed-bean>
+   		<managed-bean-name>eparsuba</managed-bean-name>
+   		<managed-bean-class>com.adobe.analytics.client.managed.EparSUBABean</managed-bean-class>
+   		<managed-bean-scope>request</managed-bean-scope>
+   </managed-bean>
+   <managed-bean>
+   		<managed-bean-name>eparshop</managed-bean-name>
+   		<managed-bean-class>com.adobe.analytics.client.managed.EparSHOPBean</managed-bean-class>
+   		<managed-bean-scope>request</managed-bean-scope>
+   </managed-bean>
+   <managed-bean>
+   		<managed-bean-name>eparsoub</managed-bean-name>
+   		<managed-bean-class>com.adobe.analytics.client.managed.EparSOUBBean</managed-bean-class>
+   		<managed-bean-scope>request</managed-bean-scope>
+   </managed-bean>
 </faces-config>
